@@ -45,7 +45,7 @@ Subsequent response definitions will only detail the expected value od the 'data
 - '"date":string' The date the note was created, or updated, determined by the program
 - '"mesasage":string' The main body of the note, containing the message meant for the reader
 
-*Response"
+*Response*
 
 - '201 Created' on success
 
@@ -59,7 +59,7 @@ Subsequent response definitions will only detail the expected value od the 'data
 }
 '''
 
-## Look up notes
+### Look up notes
 
 'GET /api/notes?id=<id number>'
  or 'Get /api/notes?user=<user name>'
@@ -79,7 +79,7 @@ Subsequent response definitions will only detail the expected value od the 'data
 }
 '''
 
-## Delete Note
+### Delete Note
 
 'DELETE /api/notes?id=<id number>'
 
@@ -88,7 +88,7 @@ Subsequent response definitions will only detail the expected value od the 'data
 -'404 Not Found' if the note doesn't exist
 -'200 OK' on success
 
-## Edit Note
+### Edit Note
 
 'PUT /api/notes?id=<id number>
  
@@ -101,7 +101,7 @@ Subsequent response definitions will only detail the expected value od the 'data
  - '200 OK' on success
  - "Error: No id field provided. Please specify an id"
  
- ## Archive Note
+ ### Archive Note
  
  'PUT /api/notes?id=<id number>
   
@@ -110,7 +110,7 @@ Subsequent response definitions will only detail the expected value od the 'data
  - "note archived" '200 OK' on success
  - "Error: No id field provided. Please specify an id"
  
- ## View Archived Notes 
+ ### View Archived Notes 
  
  'GET /api/notes/archive'
  
