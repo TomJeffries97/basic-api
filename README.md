@@ -16,7 +16,7 @@ Subsequent response definitions will only detail the expected value od the 'data
 
 *Definitions*
 
-'GET api/notes/all'
+'GET /api/notes/all'
 
 *Response*
 
@@ -61,8 +61,8 @@ Subsequent response definitions will only detail the expected value od the 'data
 
 ## Look up notes
 
-'GET api/notes?id=<id number>'
- or 'Get api/notes?user=<user name>'
+'GET /api/notes?id=<id number>'
+ or 'Get /api/notes?user=<user name>'
 
 *Response*
 
@@ -81,7 +81,7 @@ Subsequent response definitions will only detail the expected value od the 'data
 
 ## Delete Note
 
-'DELETE api/notes?id=<id number>'
+'DELETE /api/notes?id=<id number>'
 
 *Response*
 
@@ -90,7 +90,7 @@ Subsequent response definitions will only detail the expected value od the 'data
 
 ## Edit Note
 
-'PUT api/notes?id=<id number>
+'PUT /api/notes?id=<id number>
  
  *argument*
  
@@ -103,7 +103,7 @@ Subsequent response definitions will only detail the expected value od the 'data
  
  ## Archive Note
  
- 'PUT api/notes?id=<id number>
+ 'PUT /api/notes?id=<id number>
   
  *response* 
  
@@ -112,10 +112,21 @@ Subsequent response definitions will only detail the expected value od the 'data
  
  ## View Archived Notes 
  
- 'GET api/notes/archive'
+ 'GET /api/notes/archive'
  
  *response* 
  
  - '200 Ok' on success
  
  displays all archived notes in the json format as before.
+
+
+## Discussion on code
+
+I used the code by running the file through a command prompt, and then sending requests via postman.
+The code was run through the usual IP address 127.0.0.1:5000.
+
+I decided to create the api using python, as it was the language I was most comfortable using. Therefore this dictated what I could use to implement the api. As this was my first attempt at creating an api, and I had no previous experience creating one, I googled what modules would be useful. I decide on using the webfram Flask, as it is a simple microframe for beginners, which would suit me and the project I was completing.
+There are a few decision that I have made throughout my code, which are a personal choice, and could be changed to match the way the designer would like the program to run. For example, when deleting a note, the list of saved notes is returned to the user, to prove the note was deleted. 
+I also decided to take the ability to set the id and date of the note away from the user. I did this so that the user could not accidentally write over a saved note, and so that the date would always be correct. The date also updates, when the note is editted. This however does come with its drawbacks. When a note is deleted, that id is left available, however the program just incements the id, meaning that there will be continuously free ids, a problem I would eliminate with more time to work on the project.
+If I were to spend more time on the project, beside the previously mentioned problem, I would also implement a database for the notes. Currenty all data is lost upon closing the file, however by integrating a database to the web application, all inputted data would be saved and later retrieved. I would also like to improve the method on posting data to the api. Currently it is quite slow and not user friendly to have to send the data through the body of the request using the api testing application. It would be better to input the data on the website, however this would take a lot of research for me to implement.
