@@ -1,3 +1,8 @@
+"""
+@author: Thomas Jeffries
+Email: TAJ16@ic.ac.uk
+"""
+
 import flask
 import datetime
 from flask import Flask, request, jsonify
@@ -6,7 +11,6 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 now = datetime.datetime.now()
 
-#parser = reqparse.RequestParser()
 
 notes = [
 	{'id': 1,
@@ -22,11 +26,11 @@ archived_notes = []
 def home():
     return "<h1>Note Taker</h1><p>This site is a prototype API taking notes and editing notes.</p>"
 
-@app.route('/api/v1/resources/notes/all', methods=['GET'])
+@app.route('/api/notes/all', methods=['GET'])
 def api_all():
     return jsonify(notes)
 	
-@app.route('/api/v1/resources/notes', methods=['GET'])
+@app.route('/api/notes', methods=['GET'])
 def api_search():
     # create an empty list for the results
     results = []
@@ -54,7 +58,7 @@ def api_search():
     # Python dictionaries to the JSON format.
     return jsonify(results)
 
-@app.route('/api/v1/resources/notes', methods=['POST'])
+@app.route('/api/notes', methods=['POST'])
 def create_note():
     message = request.json['message']
     if not message:
@@ -69,7 +73,7 @@ def create_note():
     notes.append(note)
     return jsonify({'notes': notes}), 201
 
-@app.route('/api/v1/resources/notes', methods=['DELETE'])
+@app.route('/api/notes', methods=['DELETE'])
 def delete_note():
     if 'id' in request.args:
         id = int(request.args['id'])
@@ -80,7 +84,7 @@ def delete_note():
             notes.remove(note)
     return jsonify({'notes': notes}), 200
 
-@app.route('/api/v1/resources/notes', methods=['PUT'])
+@app.route('/api/notes', methods=['PUT'])
 def edit_note():
     if 'id' in request.args:
         id = int(request.args['id'])
@@ -93,7 +97,7 @@ def edit_note():
                 note['date'] = now.strftime("%d-%m-%Y")
     return jsonify(note),200
 			
-@app.route('/api/v1/resources/notes/archive', methods=['PUT'])
+@app.route('/api/notes/archive', methods=['PUT'])
 def archive_note():
     if 'id' in request.args:
         id = int(request.args['id'])
@@ -103,9 +107,9 @@ def archive_note():
         if note['id'] == id:
             archived_notes.append(note)
             notes.remove(note)
-    return jsonify({'archived_notes': archived_notes}), 201
+    return "note archived" , 200
 	
-@app.route('/api/v1/resources/notes/archive', methods=['GET'])
+@app.route('/api/notes/archive', methods=['GET'])
 def get_archive():
     results = []
     if 'id' in request.args:
